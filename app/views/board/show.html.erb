@@ -1,0 +1,6 @@
+<h1>Board#show</h1>
+제목 <%= @view_post.title %>
+작성자 <%= @view_post.editor %>
+내용 <%= @view_post.content %>
+<a href = "/delete/<%= @view_post.id%>">[삭제]</a>
+<a href = "/edit/<%= @view_post.id%>">[수정]</a>
