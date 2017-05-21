@@ -15,10 +15,10 @@ Rails.application.routes.draw do
   post 'update/:post_id' => 'board#update' #수정된 데이터를 받아서 덮어쓰기 하는 곳
 
   get 'delete/:post_id' => 'board#delete'
-
-
-
-
+  
+  post 'reply_create' => 'board#reply_create'
+ 
+  get 'reply_delete/:reply_id' => 'board#reply_delete'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

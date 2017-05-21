@@ -1,6 +1,24 @@
-<h1>Board#show</h1>
-제목 <%= @view_post.title %>
-작성자 <%= @view_post.editor %>
-내용 <%= @view_post.content %>
-<a href = "/delete/<%= @view_post.id%>">[삭제]</a>
-<a href = "/edit/<%= @view_post.id%>">[수정]</a>
+<div class = container >
+    <h1>게시글 목록입니다.</h1>
+    <a  class="btn btn-default" href="/new" role="button">글쓰기</a><br><br>
+        번  호 : <%= @view_post.id %><br>
+        제  목 : <%= @view_post.title %> </a><br>
+        내  용 : <%= @view_post.content %> <br>
+        <a href= "/edit/<%=@view_post.id%>">[수정]</a>
+        <a href= "/reply_delete/<%=@view_post.id%>">[삭제]</a>
+        <hr>
+        
+        <% @view_post.replies.each do |r| %>
+            <%= r.id %><br>
+            <%= r.content %><br>
+            <a href ="/reply_delete/<%= r.id%>">[댓글삭제]</a>
+        <% end %>
+        <form action="/reply_create" method="POST">
+            <div class="form-group">
+                <input type="hidden" name="p_id" value="<%= @view_post.id%>">
+              <label for="comment">Comment:</label>
+              <textarea class="form-control" name = "content" rows="5" id="comment"></textarea>
+            </div>
+            <button type="submit" class="btn">입력</button>
+        </form>
+</div>

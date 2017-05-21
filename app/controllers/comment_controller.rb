@@ -16,14 +16,14 @@ class BoardController < ApplicationController
 
   def create
   
-    #전송받은 데이터를 모델에 저장하는 부분분
-    new_post = Post.new#모델에 행을 한개 만듬
-    new_post.title = params[:title]
-    new_post.editor = params[:editor]
-    new_post.content = params[:content]
-    new_post.save
-    
-    redirect_to '/'
+  #전송받은 데이터를 모델에 저장하는 부분분
+  new_post = Post.new#모델에 행을 한개 만듬
+  new_post.title = params[:title]
+  new_post.editor = params[:editor]
+  new_post.content = params[:content]
+  new_post.save
+  
+  redirect_to '/'
   end
 
   def edit
@@ -48,18 +48,16 @@ class BoardController < ApplicationController
     redirect_to '/'
   end
   def reply_create
-      reply_create = Reply.new
-      reply_create.title = params[:title]
-      reply_create.content =params[:content]
-      reply_create.post_id = params[:p_id]
-      reply_create.save
-      
-      redirect_to :back
-  end
+        reply_create = Reply.new
+        reply_create.title = params[:title]
+        reply_create.content =params[:content]
+        reply_create.save
+        redirect_to '/show/:post_id'
+    end
     
-  def reply_delete
-      reply_delete = Reply.find(params[:reply_id])
-      reply_delete.destroy
-      redirect_to :back
-  end
+    def reply_delete
+       reply_delete = Reply.find(params[:post_id])
+        reply_delete.destroy
+        redirect_to '/show/:post_id'
+    end
 end
