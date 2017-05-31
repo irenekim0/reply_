@@ -1,7 +1,19 @@
 <h1>게시글을 입력해주세요.</h1>
-<form action='/create' method ="POST">
+<form action='/create' method ="POST" enctype="multipart/form-data">
     제목 : <input type= "text"name="title"><br>
-    작성자 :<input type ="text" name = "editor"><br>
+    작성자 : <% if user_signed_in? %>
+                 <%= current_user.email %>
+             <% end %>
+             
+             <% unless user_signed_in? %> 
+                 <input type ="text" name = "editor">
+             <% end %>
+             
+             <br>
     내용 : <textarea row="5" name = "content"></textarea>
+    
+    <input type = "file" name="imageboard" accept="image/*"> 
+    
     <input type = "submit">
+    
 </form>

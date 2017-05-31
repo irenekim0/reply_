@@ -12,15 +12,23 @@ class BoardController < ApplicationController
   end
 
   def new
+      unless user_signed_in?
+      redirect_to '/users/sign_in'
+      end
   end
-
+  
+  
   def create
+    
+    u = AvatarUploader.new
+    u.store!(params[:imageboard])
   
     #전송받은 데이터를 모델에 저장하는 부분분
     new_post = Post.new#모델에 행을 한개 만듬
     new_post.title = params[:title]
     new_post.editor = params[:editor]
     new_post.content = params[:content]
+    new_post.image_url = u
     new_post.save
     
     redirect_to '/'

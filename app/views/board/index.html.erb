@@ -1,9 +1,21 @@
 <h1>게시글 목록</h1>
 <a href = "/new">[글 쓰 기]></a>
+
+<% if user_signed_in? %>
+    <%= current_user.email %>
+    <a href = '/users/sign_out'>로그아웃</a>
+    <% else %>
+        <a href = '/users/sign_in'>로그인하세요</a>
+        <!--create : save-->
+
+<% end %>
+
 <% @list_post.each do |list| %>
 제목 : <a href= "/show/<%= list.id %>"><%= list.title %></a><br>
 내용 : <%= list.content %><br>
-작성자: <%= list.editor %><br>
+작성자: <% if user_signed_in? %>
+            <%= current_user.email %>
+        <% end %><br>
 <hr>
 <% end %>
 
